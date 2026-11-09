@@ -599,6 +599,7 @@ def main():
          f"4. Vérifie la compilation : `./gradlew {mod}:compileDebugKotlin` puis `./gradlew {mod}:spotlessApply`.\n"
          f"5. APK installable : `./gradlew {mod}:assembleDebug` ; teste sur le vrai site avant toute PR.\n"
          "6. Extension basée sur la lib 16 : il faut une version de l'app qui la supporte.")
+    Path(a.out).mkdir(parents=True, exist_ok=True)
     (Path(a.out) / "REPORT.md").write_text("\n".join(REPORT) + "\n", encoding="utf-8")
     print(f"\n✅ Projet écrit dans {out}\n📄 Rapport : {Path(a.out) / 'REPORT.md'}")
 

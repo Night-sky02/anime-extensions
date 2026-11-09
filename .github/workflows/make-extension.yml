@@ -42,14 +42,14 @@ jobs:
           EXT_LANG: ${{ inputs.lang }}
           EXT_NSFW: ${{ inputs.nsfw }}
         run: |
-          pip install beautifulsoup4
-          args=()
-          if [ "$EXT_NSFW" = "true" ]; then args+=(--nsfw); fi
-          python tools/aniyomi_gen.py "$SITE_URL" --name "$EXT_NAME" --lang "$EXT_LANG" --repo . --out ./out "${args[@]}"
           pkg=$(printf '%s' "$EXT_NAME" | tr -cd 'a-zA-Z0-9' | tr 'A-Z' 'a-z')
           lang=$(printf '%s' "$EXT_LANG" | cut -d- -f1 | tr 'A-Z' 'a-z')
           echo "PKG=$pkg" >> "$GITHUB_ENV"
           echo "LANG_CODE=$lang" >> "$GITHUB_ENV"
+          pip install beautifulsoup4
+          args=()
+          if [ "$EXT_NSFW" = "true" ]; then args+=(--nsfw); fi
+          python tools/aniyomi_gen.py "$SITE_URL" --name "$EXT_NAME" --lang "$EXT_LANG" --repo . --out ./out "${args[@]}"
 
       - name: Upload generated sources + report (always)
         if: always()

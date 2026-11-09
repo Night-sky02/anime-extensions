@@ -76,7 +76,9 @@ jobs:
           grep -n "loadIndividualExtension(\"$LANG_CODE\"" settings.gradle.kts
 
       - name: Build the APK
-        run: ./gradlew ":src:${LANG_CODE}:${PKG}:assembleDebug"
+        run: |
+          ./gradlew ":src:${LANG_CODE}:${PKG}:spotlessApply"
+          ./gradlew ":src:${LANG_CODE}:${PKG}:assembleDebug"
 
       - name: Upload the APK
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
